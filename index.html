@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departamento Municipal de Caça aos Bugs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    ==============================================================
+    GABARITO DE BUGS NO HTML (SÓ O PROFESSOR LÊ)
+    ==============================================================
+    BUG #13 — <input type="password"> no campo Nome (nome vira bolinhas)
+    BUG #14 — um card usa <h1> em vez de <h3> (título gigante e preto)
+    BUG #15 — campo Descrição é <input type="date"> no lugar de <textarea>
+    BUG #16 — <a href="#"> deveria ser href="#formulario" (menu "Denunciar")
+    BUG #17 — <img src="mascote-departamento.png"> aponta pra arquivo inexistente
+    BUG #18 — imagem do rodapé com width/height gigantes (400x400) quebra o layout
+    --------------------------------------------------------------
+    Bugs no CSS estão em style.css (#1 a #6)
+    Bugs no JavaScript estão em script.js (#7 a #12)
+    ==============================================================
+    -->
+
+    <header class="cabecalho">
+        <div class="logo">🐛 DMCB</div>
+        <nav class="menu">
+            <a href="#inicio">Início</a>
+            <a href="#capturados">Capturados</a>
+            <!-- Link fica invisível por causa do CSS (BUG #1) -->
+            <a href="#procurados" class="link-invisivel">Procurados</a>
+            <!-- BUG #16: href="#" leva pro topo; deveria ser href="#formulario" -->
+            <a href="#">Denunciar</a>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <!-- BUG #17: arquivo mascote-departamento.png não existe (ícone de imagem quebrada) -->
+        <img src="./mascote-departamento.png" alt="Mascote do DMCB" class="mascote">
+
+        <h1>Departamento Municipal de Caça aos Bugs</h1>
+        <p class="subtitulo-hero">Protegendo a cidade desde 1998</p>
+        <p>Aqui a gente extermina bugs — tanto os de software quanto os de seis patinhas. Denúncia é anônima. Café pro agente é opcional.</p>
+
+        <a href="#formulario" class="cta-torto">Denunciar um Bug 🕷️</a>
+    </section>
+
+    <section id="capturados" class="contador-secao">
+        <h2>Bugs Capturados este mês</h2>
+        <div id="contador" class="contador-display">0</div>
+        <div class="botoes-contador">
+            <button id="btn-incrementar">+ Capturar Bug</button>
+            <button id="btn-zerar">Zerar</button>
+        </div>
+        <p class="dica">Clique em "+ Capturar Bug" pra registrar um bug capturado. Aperte "Zerar" pra começar o mês novo.</p>
+    </section>
+
+    <section id="procurados" class="procurados-secao">
+        <!-- Título fica alinhado à direita por CSS (BUG #4) -->
+        <h2 class="titulo-torto">Bugs Mais Procurados</h2>
+        <div class="cards-grid">
+            <!-- BUG #14: este card usa <h1> em vez de <h3>, o título fica GIGANTE e preto -->
+            <div class="card">
+                <div class="emoji-grande">🕷️</div>
+                <h1>Aranha das Sombras</h1>
+                <p>Rasteja pelo rodapé. Recompensa: R$ 500</p>
+            </div>
+            <!-- Card com border-radius exagerado por CSS (BUG #3) -->
+            <div class="card card-cortado">
+                <div class="emoji-grande">🪲</div>
+                <h3>Besouro Blindado</h3>
+                <p>Ignora updates de segurança. Recompensa: R$ 750</p>
+            </div>
+            <!-- Card com hover que some o texto por CSS (BUG #6) -->
+            <div class="card card-hover-quebrado">
+                <div class="emoji-grande">🐜</div>
+                <h3>Formiga Fantasma</h3>
+                <p>Aparece só em produção. Recompensa: R$ 1200</p>
+            </div>
+            <div class="card">
+                <div class="emoji-grande">🦟</div>
+                <h3>Mosquito da Memória</h3>
+                <p>Suga RAM da máquina. Recompensa: R$ 900</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="formulario" class="formulario-secao">
+        <h2>Denuncie um Bug</h2>
+        <p class="subtitulo-form">Bugs pequenos, grandes, com asas, com bytes. Vamos investigar.</p>
+        <form id="form-denuncia">
+            <!-- BUG #13: <input type="password"> — o nome aparece como bolinhas ao digitar -->
+            <label for="nome">Seu nome:</label>
+            <input type="password" id="nome" name="nome" placeholder="Ex: Maria da Silva">
+
+            <label for="email">Seu e-mail:</label>
+            <input type="text" id="email" name="email" placeholder="voce@email.com">
+
+            <label for="tipo">Tipo de bug:</label>
+            <select id="tipo" name="tipo">
+                <option value="">-- selecione --</option>
+                <option value="software">Bug de software</option>
+                <option value="inseto">Inseto de verdade</option>
+                <option value="misterioso">Não sei o que é</option>
+            </select>
+
+            <label for="descricao">Descreva o bug:</label>
+            <!-- BUG #15: <input type="date"> onde deveria ser <textarea> — aparece um calendário -->
+            <input type="date" id="descricao" name="descricao">
+
+            <button type="submit" id="btn-enviar">Enviar Denúncia</button>
+        </form>
+        <div id="mensagem-form" class="mensagem"></div>
+    </section>
+
+    <section class="depoimentos-secao">
+        <h2>O que dizem os cidadãos</h2>
+        <div id="depoimentos-container">
+            <blockquote class="depoimento ativo">
+                <p>"Achei três bugs na minha cozinha e o DMCB resolveu em minutos!"</p>
+                <cite>— Dona Rita, dona de casa</cite>
+            </blockquote>
+            <blockquote class="depoimento">
+                <p>"O sistema estava cheio de baratas... digo, bugs. Sumiram todos!"</p>
+                <cite>— Sr. Almeida, empresário</cite>
+            </blockquote>
+            <blockquote class="depoimento">
+                <p>"Nunca mais vi um mosquito no meu console.log."</p>
+                <cite>— Júlia, desenvolvedora</cite>
+            </blockquote>
+        </div>
+    </section>
+
+    <footer class="rodape">
+        <!-- BUG #18: width e height gigantes (400x400) fazem a imagem tomar conta do rodapé -->
+        <img src="https://placehold.co/60x60/2d5f2d/ffffff?text=DMCB" alt="Logo DMCB" width="400" height="400">
+        <p>Departamento Municipal de Caça aos Bugs &copy; 2026</p>
+        <!-- Emoji fica de cabeça pra baixo por CSS (BUG #5) -->
+        <div class="emoji-rodape">🐛</div>
+        <button class="btn-rodape">Curtir 👍</button>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
